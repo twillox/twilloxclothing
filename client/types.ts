@@ -36,6 +36,11 @@ export interface Category {
   slug: string;
   name: string;
   description: string;
+  /**
+   * Firestore document ID. Optional for legacy data.
+   */
+  id?: string;
+  imageUrl?: string;
   createdAt: Timestamp;
 }
 
