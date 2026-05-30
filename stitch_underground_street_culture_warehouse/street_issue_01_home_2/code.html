@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UNDERGROUND WAREHOUSE | STREET_ISSUE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* Glitch Effect on Hover for Crate Buttons */
+        .crate-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #eec200;
+        }
+
+        /* Warning Tape Animation */
+        @keyframes scroll-tape {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-tape {
+            animation: scroll-tape 10s linear infinite;
+        }
+        
+        /* Stripes for Tape */
+        .bg-stripes {
+            background-image: repeating-linear-gradient(
+                -45deg,
+                #ffe083,
+                #ffe083 20px,
+                #12131a 20px,
+                #12131a 40px
+            );
+        }
+
+        /* Industrial Pulse for Button */
+        @keyframes industrial-pulse {
+            0% { box-shadow: 4px 4px 0px 0px rgba(35,27,0,1); }
+            50% { box-shadow: 6px 6px 0px 0px rgba(238,194,0,0.8), 0 0 15px rgba(238,194,0,0.4); transform: translate(-1px, -1px); }
+            100% { box-shadow: 4px 4px 0px 0px rgba(35,27,0,1); }
+        }
+        .pulse-button {
+            animation: industrial-pulse 2s infinite ease-in-out;
+        }
+
+        /* Glitch Text Entrance */
+        @keyframes glitch-entrance {
+            0% { transform: translate(0); opacity: 0; clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%); }
+            10% { transform: translate(-2px, 2px); opacity: 0.5; clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%); }
+            20% { transform: translate(2px, -2px); opacity: 0.8; clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%); }
+            30% { transform: translate(-2px, 0); opacity: 1; clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%); }
+            40% { transform: translate(2px, 2px); clip-path: polygon(0 80%, 100% 80%, 100% 90%, 0 90%); }
+            50% { transform: translate(0); clip-path: none; }
+            100% { opacity: 1; }
+        }
+        .glitch-text {
+            animation: glitch-entrance 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Shake/Flash Effect */
+        @keyframes shake-flash {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 1px) rotate(-1deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            60% { transform: translate(-1px, -1px) rotate(0deg); }
+            80% { transform: translate(1px, 1px) rotate(-1deg); }
+            100% { transform: translate(0); }
+        }
+        .interactive-card:active {
+            animation: shake-flash 0.3s;
+        }
+        .interactive-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s;
+            z-index: 20;
+        }
+        .interactive-card:active::after {
+            opacity: 0.8;
+            transition: opacity 0s;
+        }
+
+        /* Custom Cursor */
+        .cursor-dust {
+            width: 4px;
+            height: 4px;
+            background: #e3e1ec;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            border-radius: 50%;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+        .cursor-dust.active {
+            transform: scale(3);
+            background: #ffe083;
+        }
+        
+        /* Particle */
+        .dust-particle {
+            position: fixed;
+            background: rgba(227, 225, 236, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: float-away 1s linear forwards;
+        }
+        @keyframes float-away {
+            to {
+                transform: translateY(-20px) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c4c7c7",
+                      "on-surface": "#e3e1ec",
+                      "primary-fixed": "#e5e2e1",
+                      "inverse-primary": "#5f5e5e",
+                      "error-container": "#93000a",
+                      "surface-bright": "#383941",
+                      "secondary-fixed": "#ffe083",
+                      "on-primary": "#313030",
+                      "surface-container-high": "#292931",
+                      "on-error": "#690005",
+                      "primary": "#c9c6c5",
+                      "surface": "#12131a",
+                      "primary-container": "#0a0a0a",
+                      "on-tertiary-container": "#e03b34",
+                      "on-background": "#e3e1ec",
+                      "outline": "#8e9192",
+                      "on-secondary-fixed-variant": "#574500",
+                      "tertiary": "#ffb4ab",
+                      "surface-container-low": "#1a1b22",
+                      "on-primary-container": "#7b7979",
+                      "tertiary-container": "#200001",
+                      "surface-container": "#1e1f26",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-secondary": "#3c2f00",
+                      "inverse-surface": "#e3e1ec",
+                      "on-tertiary-fixed": "#410002",
+                      "secondary": "#ffe083",
+                      "surface-tint": "#c9c6c5",
+                      "surface-container-highest": "#33343c",
+                      "on-secondary-fixed": "#231b00",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#12131a",
+                      "inverse-on-surface": "#2f3038",
+                      "secondary-fixed-dim": "#eec200",
+                      "on-tertiary-fixed-variant": "#93000b",
+                      "tertiary-fixed": "#ffdad6",
+                      "background": "#12131a",
+                      "on-secondary-container": "#645000",
+                      "surface-container-lowest": "#0d0e15",
+                      "outline-variant": "#444748",
+                      "on-tertiary": "#690005",
+                      "secondary-container": "#eec200",
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-variant": "#33343c",
+                      "primary-fixed-dim": "#c9c6c5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-safe": "24px",
+                      "gutter": "16px",
+                      "unit": "4px",
+                      "stack-tight": "8px",
+                      "stack-loose": "48px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Anton"
+                      ],
+                      "headline-lg": [
+                              "Anton"
+                      ],
+                      "display-xl": [
+                              "Anton"
+                      ],
+                      "display-xl-mobile": [
+                              "Anton"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl": [
+                              "120px",
+                              {
+                                      "lineHeight": "100px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl-mobile": [
+                              "64px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+      cursor: none; /* Hide default cursor */
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden relative">
+<div class="cursor-dust" id="custom-cursor"></div>
+<div class="grain-overlay"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-unit bg-surface dark:bg-surface border-b-4 border-outline dark:border-outline-variant shadow-[4px_4px_0px_0px_rgba(238,194,0,1)]">
+<button class="text-secondary dark:text-secondary p-unit hover:bg-primary dark:hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-headline-md">menu</span>
+</button>
+<div class="text-headline-md font-headline-md uppercase tracking-tighter text-on-surface dark:text-on-surface">
+            STREET_ISSUE
+        </div>
+<button class="text-secondary dark:text-secondary p-unit hover:bg-primary dark:hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-headline-md">shopping_basket</span>
+</button>
+</header>
+<!-- NavigationDrawer (Hidden by default, can be toggled via JS if needed, leaving semantic structure) -->
+<nav class="fixed top-0 left-0 h-full w-80 bg-surface-container-highest dark:bg-surface-container-highest border-r-4 border-outline transform -translate-x-full transition-transform z-50 flex flex-col p-margin-safe space-y-stack-tight" id="drawer">
+<div class="text-headline-lg font-headline-lg text-secondary mb-stack-loose uppercase">SYSTEM_OVERRIDE</div>
+<a class="text-headline-md font-headline-md uppercase p-unit hover:invert bg-secondary text-on-secondary-fixed font-black skew-x-2 transition-transform duration-75 flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">inventory_2</span> THE_MANIFEST
+        </a>
+<a class="text-headline-md font-headline-md uppercase p-unit hover:invert text-on-surface hover:bg-surface-variant flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">warehouse</span> STOCK_ROOM
+        </a>
+<a class="text-headline-md font-headline-md uppercase p-unit hover:invert text-on-surface hover:bg-surface-variant flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">local_fire_department</span> DROP_ZONE
+        </a>
+<a class="text-headline-md font-headline-md uppercase p-unit hover:invert text-on-surface hover:bg-surface-variant flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">history_edu</span> ARCHIVE
+        </a>
+<a class="text-headline-md font-headline-md uppercase p-unit hover:invert text-on-surface hover:bg-surface-variant flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">terminal</span> COMMAND
+        </a>
+</nav>
+<!-- Main Content -->
+<main class="pt-[72px]"> <!-- Offset for fixed header -->
+<!-- Top Warning Tape Scroll -->
+<div class="w-full overflow-hidden h-6 bg-stripes flex items-center border-b-2 border-[#262626]">
+<div class="flex whitespace-nowrap animate-tape text-on-secondary text-[10px] font-label-mono font-bold">
+<span class="mx-4">/// HAZARD ZONE /// RESTRICTED AREA ///</span>
+<span class="mx-4">/// HAZARD ZONE /// RESTRICTED AREA ///</span>
+<span class="mx-4">/// HAZARD ZONE /// RESTRICTED AREA ///</span>
+<span class="mx-4">/// HAZARD ZONE /// RESTRICTED AREA ///</span>
+<span class="mx-4">/// HAZARD ZONE /// RESTRICTED AREA ///</span>
+<span class="mx-4">/// HAZARD ZONE /// RESTRICTED AREA ///</span>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="relative w-full h-[795px] min-h-[600px] bg-surface-container border-b-[3px] border-[#262626] flex flex-col justify-end overflow-hidden">
+<!-- Background Image (Parallax) -->
+<div class="absolute inset-0 bg-cover bg-center bg-no-repeat grayscale contrast-150 opacity-60 mix-blend-luminosity transform will-change-transform" data-alt="A gritty, high-contrast flash photography shot of two streetwear models standing in a dimly lit, smoke-filled industrial warehouse. The models wear oversized, utilitarian clothing with heavy metal zippers and thick textures. Harsh, direct light creates deep, jagged shadows against raw concrete walls and exposed steel beams. The overall aesthetic is raw, aggressive, and steeped in an underground, brutalist dark-mode style." id="parallax-bg" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQMjwcEPL7CWHA0qZXeHhZcU3LbnUu91Hzg-tFnPKflTrq4zFcvUs5Jfvmyjqcjt7W9WUpC1dlRJANjtPb24ab-hHW5HZOzOxtiX-0wS8txz-S_u3R_7Lf8Xu0Ua7O_DCXBU3UNjd8ZH7v8oH2fOHFUimh4LSGyZm1KP2E-yxQgKBS9h283PzXIbtSyMowikRmn2bPENDwpAFdYV0RwQYOVME2asSHkLxtg899mq2xup7FVOF3xHr3lRbEPcpLzh3x0xU9Ym_oL-E'); height: 120%; top: -10%;">
+</div>
+<!-- Content -->
+<div class="relative z-10 p-margin-safe max-w-7xl mx-auto w-full">
+<div class="text-secondary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="text-label-mono font-label-mono uppercase tracking-widest bg-secondary text-on-secondary px-1">SECURITY CLEARANCE REQUIRED</span>
+</div>
+<h1 class="text-display-xl-mobile md:text-display-xl font-display-xl-mobile md:font-display-xl text-on-surface uppercase leading-none mb-2 mix-blend-difference glitch-text">
+                    NO RULES.<br/>STREET ISSUE 01.
+                </h1>
+<div class="mt-stack-loose">
+<button class="pulse-button inline-block bg-secondary text-on-secondary font-headline-md text-headline-md uppercase px-8 py-4 border-2 border-on-secondary shadow-[4px_4px_0px_0px_rgba(35,27,0,1)] transition-all duration-150 cursor-none">
+                        ENTER WAREHOUSE
+                    </button>
+</div>
+</div>
+<!-- Warning Tape Scroll -->
+<div class="absolute bottom-0 w-full overflow-hidden h-8 bg-stripes flex items-center z-20 border-t-2 border-[#262626]">
+<div class="flex whitespace-nowrap animate-tape text-on-secondary text-label-mono font-label-mono font-bold">
+<span class="mx-4">/// NEW DROP ACTIVE /// PROCEED WITH CAUTION ///</span>
+<span class="mx-4">/// NEW DROP ACTIVE /// PROCEED WITH CAUTION ///</span>
+<span class="mx-4">/// NEW DROP ACTIVE /// PROCEED WITH CAUTION ///</span>
+<span class="mx-4">/// NEW DROP ACTIVE /// PROCEED WITH CAUTION ///</span>
+<span class="mx-4">/// NEW DROP ACTIVE /// PROCEED WITH CAUTION ///</span>
+<span class="mx-4">/// NEW DROP ACTIVE /// PROCEED WITH CAUTION ///</span>
+</div>
+</div>
+</section>
+<!-- Live Drop Section (Inventory Grid) -->
+<section class="w-full py-stack-loose px-gutter bg-surface relative z-30">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end border-b-4 border-outline pb-4 mb-stack-loose">
+<div>
+<span class="text-label-mono font-label-mono text-tertiary block mb-1">DATA_SET: 001-A</span>
+<h2 class="text-headline-lg font-headline-lg uppercase text-on-surface">LIVE_INVENTORY</h2>
+</div>
+<span class="text-label-mono font-label-mono text-on-surface-variant hidden md:block">SORT: SEVERITY</span>
+</div>
+<!-- Bento Grid / Asymmetric Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Featured Item (Spans larger) -->
+<article class="md:col-span-8 bg-surface-container-high border-2 border-[#262626] relative group overflow-hidden interactive-card cursor-none">
+<div class="absolute top-0 right-0 bg-secondary text-on-secondary text-label-mono font-label-mono px-2 py-1 z-10 border-l-2 border-b-2 border-[#262626] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            HAZARD: HIGH
+                        </div>
+<div class="h-96 bg-surface-variant relative">
+<img class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300" data-alt="A close-up, high-contrast editorial shot of a heavy-duty, tactical streetwear jacket constructed from thick nylon and canvas. The jacket features oversized metal D-rings, rugged industrial zippers, and subtle reflective hazard tape details. The lighting mimics a sudden, harsh camera flash in a dark, empty warehouse, highlighting the matte, technical textures of the fabric against a stark, pitch-black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaBm_GosjECG6R6Ys0VgVjzLOsmSFVPRdVFWzpU6j2LeXU98zjwFSob7ZyVKc9lE78IZwxEZtDdOMIkLbHwUfOYMOwZ6ewtbe9o_emJenIQMlyjjlmqjO1Sctki3IeSswBtx0GjvTL9WzPb08QwU6t0x51O7Slzpf5VNJ0MsfEVAnbdi7AjKr27wmT1cj_RUcCY5ZjunXOT0H7crAXYt1KsOCTNe4CaRONQCO2eloCKcrxwac_p4xqwOk2JCyaqT0oZoO2fXuwzmw"/>
+<!-- Stencil Overlay -->
+<div class="absolute bottom-4 left-4 text-display-xl-mobile font-display-xl-mobile text-on-surface opacity-30 mix-blend-overlay pointer-events-none">
+                                001
+                            </div>
+</div>
+<div class="p-4 border-t-2 border-[#262626] flex justify-between items-center bg-surface-container">
+<div>
+<h3 class="text-headline-md font-headline-md uppercase text-on-surface">TACTICAL_SHELL</h3>
+<p class="text-label-mono font-label-mono text-on-surface-variant">SKU: TS-8849-BLK</p>
+</div>
+<button class="crate-button bg-primary text-on-primary text-label-mono font-label-mono px-4 py-2 border-2 border-on-primary shadow-[3px_3px_0px_0px_rgba(28,27,27,1)] cursor-none pointer-events-none">
+                                ACQUIRE_ $180
+                            </button>
+</div>
+</article>
+<!-- Standard Item -->
+<article class="md:col-span-4 bg-surface-container-high border-2 border-[#262626] relative group interactive-card cursor-none">
+<div class="absolute top-0 right-0 bg-error text-on-error text-label-mono font-label-mono px-2 py-1 z-10 border-l-2 border-b-2 border-[#262626] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            STOCK: CRITICAL
+                        </div>
+<div class="h-64 md:h-96 bg-surface-variant relative">
+<img class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300" data-alt="A stark, top-down product shot of distressed, heavy-denim cargo pants laid flat on rough concrete. The pants are styled with industrial utility straps, oversized metallic snaps, and raw, frayed hems. Illuminated by a strong, singular cold spotlight that creates harsh, sharp shadows, emphasizing the brutalist, dark-mode streetwear aesthetic of the garment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMShNDh5Ev79FhVajc2dMj0HpDA0Qa4-7UQ45GNtbNiBq0loMnLJnbcURtDsG4hD9ZAroK_dmBEx9qop4E3aqRaAlV0Tv64rVGHWdGM404RP_7Uu4y3qmkYssJp4HXtr0OzoXPhlKZG_irnUh7zI8NAIneum5ZIPlLmOzjrP4HChjBOgJLrebLEno845cnxzxor0JWu0I8j7xNd_Q5tSbkHT49CdNNsSaXDMFxIRSrruXOAWvOf4vuVzg4n50mttSCavWX0WYKf8E"/>
+</div>
+<div class="p-4 border-t-2 border-[#262626] flex justify-between items-center bg-surface-container">
+<div>
+<h3 class="text-headline-md font-headline-md uppercase text-on-surface">CARGO_RIG</h3>
+<p class="text-label-mono font-label-mono text-on-surface-variant">SKU: CR-221A-GRY</p>
+</div>
+<span class="text-label-mono font-label-mono text-secondary">
+                                $145
+                            </span>
+</div>
+</article>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-gutter py-stack-loose grid grid-cols-2 md:grid-cols-4 gap-gutter bg-surface-container-lowest dark:bg-surface-container-lowest border-t-4 border-dashed border-outline relative z-30">
+<div>
+<span class="text-label-mono font-label-mono text-tertiary-fixed-dim block mb-4">MANIFESTO_2024_V1.0</span>
+<p class="text-body-md font-body-md text-on-surface-variant">Underground Warehouse protocols in effect. All acquisitions final.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-error dark:hover:text-error uppercase cursor-none" href="#">LOGISTICS</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-error dark:hover:text-error uppercase cursor-none" href="#">DISTRIBUTION</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-error dark:hover:text-error uppercase cursor-none" href="#">VOID_RECORDS</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-error dark:hover:text-error uppercase cursor-none" href="#">ENCRYPTED</a>
+</div>
+<div class="flex flex-col items-start md:items-end gap-2">
+<span class="material-symbols-outlined text-headline-lg text-tertiary-fixed-dim">qr_code_2</span>
+</div>
+</footer>
+<script>
+        // Drawer toggle
+        const menuBtn = document.querySelector('header button:first-child');
+        const drawer = document.getElementById('drawer');
+        
+        menuBtn.addEventListener('click', () => {
+            drawer.classList.toggle('-translate-x-full');
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxBg = document.getElementById('parallax-bg');
+            if(parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Custom Cursor & Dust Particles
+        const cursor = document.getElementById('custom-cursor');
+        let isMoving = false;
+        let lastMoveTime = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            // Create dust particles
+            const currentTime = Date.now();
+            if (currentTime - lastMoveTime > 50) {
+                createDust(e.clientX, e.clientY);
+                lastMoveTime = currentTime;
+            }
+        });
+
+        document.addEventListener('mousedown', () => cursor.classList.add('active'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+        function createDust(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'dust-particle';
+            
+            // Random size 2-6px
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position offset
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            
+            particle.style.left = `${x + offsetX}px`;
+            particle.style.top = `${y + offsetY}px`;
+            
+            document.body.appendChild(particle);
+            
+            // Remove after animation
+            setTimeout(() => {
+                particle.remove();
+            }, 1000);
+        }
+    </script>
+</body></html>

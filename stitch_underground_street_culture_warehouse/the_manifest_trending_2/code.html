@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STREET_ISSUE // THE_MANIFEST</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c4c7c7",
+                      "on-surface": "#e3e1ec",
+                      "primary-fixed": "#e5e2e1",
+                      "inverse-primary": "#5f5e5e",
+                      "error-container": "#93000a",
+                      "surface-bright": "#383941",
+                      "secondary-fixed": "#ffe083",
+                      "on-primary": "#313030",
+                      "surface-container-high": "#292931",
+                      "on-error": "#690005",
+                      "primary": "#c9c6c5",
+                      "surface": "#12131a",
+                      "primary-container": "#0a0a0a",
+                      "on-tertiary-container": "#e03b34",
+                      "on-background": "#e3e1ec",
+                      "outline": "#8e9192",
+                      "on-secondary-fixed-variant": "#574500",
+                      "tertiary": "#ffb4ab",
+                      "surface-container-low": "#1a1b22",
+                      "on-primary-container": "#7b7979",
+                      "tertiary-container": "#200001",
+                      "surface-container": "#1e1f26",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-secondary": "#3c2f00",
+                      "inverse-surface": "#e3e1ec",
+                      "on-tertiary-fixed": "#410002",
+                      "secondary": "#ffe083",
+                      "surface-tint": "#c9c6c5",
+                      "surface-container-highest": "#33343c",
+                      "on-secondary-fixed": "#231b00",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#12131a",
+                      "inverse-on-surface": "#2f3038",
+                      "secondary-fixed-dim": "#eec200",
+                      "on-tertiary-fixed-variant": "#93000b",
+                      "tertiary-fixed": "#ffdad6",
+                      "background": "#12131a",
+                      "on-secondary-container": "#645000",
+                      "surface-container-lowest": "#0d0e15",
+                      "outline-variant": "#444748",
+                      "on-tertiary": "#690005",
+                      "secondary-container": "#eec200",
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-variant": "#33343c",
+                      "primary-fixed-dim": "#c9c6c5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-safe": "24px",
+                      "gutter": "16px",
+                      "unit": "4px",
+                      "stack-tight": "8px",
+                      "stack-loose": "48px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Anton"
+                      ],
+                      "headline-lg": [
+                              "Anton"
+                      ],
+                      "display-xl": [
+                              "Anton"
+                      ],
+                      "display-xl-mobile": [
+                              "Anton"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl": [
+                              "120px",
+                              {
+                                      "lineHeight": "100px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl-mobile": [
+                              "64px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        /* Custom Utilities for Brutalist interactions */
+        .hazard-tape {
+            background-image: repeating-linear-gradient(45deg, #ffe083, #ffe083 10px, #12131a 10px, #12131a 20px);
+        }
+        
+        .glitch-hover:hover .glitch-img {
+            transform: scale(1.05) translate(-2px, 2px);
+            filter: contrast(1.2) brightness(1.1) grayscale(0.2);
+            mix-blend-mode: hard-light;
+        }
+        
+        .flash-overlay {
+            opacity: 0;
+            transition: opacity 0.1s step-end;
+        }
+        
+        .glitch-hover:hover .flash-overlay,
+        .glitch-hover:active .flash-overlay {
+            opacity: 1;
+            animation: flash 0.15s forwards;
+        }
+        
+        @keyframes flash {
+            0% { opacity: 0.9; }
+            100% { opacity: 0; }
+        }
+        
+        .crt-line {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
+            background-size: 100% 4px;
+        }
+
+        /* Dynamic Grid Motion */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-1 { animation: float 6s ease-in-out infinite; }
+        .float-2 { animation: float 7s ease-in-out infinite 1s; }
+        .float-3 { animation: float 5s ease-in-out infinite 2s; }
+        .float-4 { animation: float 8s ease-in-out infinite 0.5s; }
+
+        /* Tape Interaction */
+        .tape-jitter {
+            transition: all 0.1s;
+        }
+        .group:hover .tape-jitter {
+            animation: jitter 0.2s infinite;
+        }
+        @keyframes jitter {
+            0% { transform: skew(0deg) translate(0,0); }
+            25% { transform: skew(-4deg) translate(2px, -1px); }
+            50% { transform: skew(4deg) translate(-2px, 1px); }
+            75% { transform: skew(-2deg) translate(1px, 1px); }
+            100% { transform: skew(0deg) translate(0,0); }
+        }
+
+        /* Barcode Scanner Animation */
+        @keyframes scan-line {
+            0%, 100% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            50% { top: 100%; }
+        }
+        .animate-scan {
+            animation: scan-line 2s linear infinite;
+        }
+
+        /* CSS Grain Overlay */
+        .css-grain {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: repeating-conic-gradient(#12131a 0 0.0001%, #e3e1ec 0 0.0002%);
+            animation: grain-anim 0.4s steps(2) infinite;
+        }
+        @keyframes grain-anim {
+            0% { transform: translate(1px, 1px) }
+            50% { transform: translate(-1px, -1px) }
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased overflow-x-hidden min-h-screen selection:bg-secondary selection:text-on-secondary crt-line">
+<!-- Grain Overlay -->
+<div class="css-grain"></div>
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface border-b-4 border-outline dark:border-outline-variant shadow-[4px_4px_0px_0px_rgba(238,194,0,1)] fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-unit">
+<button class="text-secondary dark:text-secondary hover:bg-primary dark:hover:bg-primary hover:text-on-primary p-2 transition-transform duration-75 skew-x-2">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg uppercase tracking-tighter text-on-surface dark:text-on-surface">
+            STREET_ISSUE
+        </h1>
+<button class="text-secondary dark:text-secondary hover:bg-primary dark:hover:bg-primary hover:text-on-primary p-2 transition-transform duration-75 skew-x-2 relative">
+<span class="material-symbols-outlined text-[24px]">shopping_basket</span>
+<span class="absolute top-0 right-0 bg-error text-on-error font-label-mono text-[10px] px-1 border border-on-surface">3</span>
+</button>
+</header>
+<div class="flex pt-[72px] md:pt-[88px] min-h-screen">
+<!-- NavigationDrawer (Desktop Side Panel) -->
+<aside class="hidden md:flex bg-surface-container-highest dark:bg-surface-container-highest border-r-4 border-outline h-full w-80 flex-col fixed left-0 p-margin-safe space-y-stack-tight z-40 overflow-y-auto">
+<div class="mb-stack-loose border-b-4 border-outline pb-unit">
+<h2 class="text-headline-lg font-headline-lg text-secondary uppercase">SYSTEM_OVERRIDE</h2>
+</div>
+<nav class="flex flex-col space-y-2">
+<!-- Active Tab -->
+<a class="bg-secondary text-on-secondary-fixed font-black text-headline-md font-headline-md uppercase flex items-center p-2 border-2 border-transparent hover:invert translate-x-1 duration-100" href="#">
+<span class="material-symbols-outlined mr-gutter">inventory_2</span>
+                    THE_MANIFEST
+                </a>
+<a class="text-on-surface hover:bg-surface-variant text-headline-md font-headline-md uppercase flex items-center p-2 border-2 border-transparent hover:border-outline hover:invert transition-all" href="#">
+<span class="material-symbols-outlined mr-gutter">warehouse</span>
+                    STOCK_ROOM
+                </a>
+<a class="text-on-surface hover:bg-surface-variant text-headline-md font-headline-md uppercase flex items-center p-2 border-2 border-transparent hover:border-outline hover:invert transition-all" href="#">
+<span class="material-symbols-outlined mr-gutter">local_fire_department</span>
+                    DROP_ZONE
+                </a>
+<a class="text-on-surface hover:bg-surface-variant text-headline-md font-headline-md uppercase flex items-center p-2 border-2 border-transparent hover:border-outline hover:invert transition-all" href="#">
+<span class="material-symbols-outlined mr-gutter">history_edu</span>
+                    ARCHIVE
+                </a>
+<a class="text-on-surface hover:bg-surface-variant text-headline-md font-headline-md uppercase flex items-center p-2 border-2 border-transparent hover:border-outline hover:invert transition-all" href="#">
+<span class="material-symbols-outlined mr-gutter">terminal</span>
+                    COMMAND
+                </a>
+</nav>
+<div class="mt-auto pt-stack-loose">
+<div class="hazard-tape h-4 w-full border-y-2 border-outline"></div>
+<p class="text-label-mono font-label-mono text-on-surface-variant mt-unit text-[10px]">SECURE CONNECTION ESTABLISHED.</p>
+</div>
+</aside>
+<!-- Main Content (Canvas) -->
+<main class="flex-1 w-full md:ml-80 p-gutter md:p-margin-safe bg-surface-dim relative">
+<!-- Section Header -->
+<div class="mb-margin-safe border-b-4 border-outline flex justify-between items-end pb-unit">
+<div>
+<h2 class="text-headline-md font-headline-md uppercase text-on-surface">Trending // Live Feed</h2>
+<p class="text-label-mono font-label-mono text-tertiary">UPDATE_FREQUENCY: REAL-TIME</p>
+</div>
+<div class="text-right hidden sm:block">
+<span class="bg-secondary text-on-secondary font-label-mono text-label-mono px-2 py-1 uppercase font-bold border-2 border-on-secondary border-dashed">Active Nodes: 4,092</span>
+</div>
+</div>
+<!-- Chaotic Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter md:gap-margin-safe grid-flow-row-dense">
+<!-- Item 1: Hero Large (Spans 2 cols, 2 rows on desktop) -->
+<article class="col-span-1 md:col-span-8 md:row-span-2 group glitch-hover float-1 relative border-4 border-outline bg-surface-container overflow-hidden min-h-[400px] md:min-h-[600px] cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
+<div class="absolute inset-0 bg-white flash-overlay z-20 pointer-events-none"></div>
+<img alt="Product Visual" class="w-full h-full object-cover glitch-img transition-transform duration-75" data-alt="A gritty, high-contrast, flash-photography style image of a chunky, futuristic street sneaker suspended in mid-air against a raw concrete background. The lighting is harsh, creating deep black shadows and blinding white highlights that mimic a warehouse security camera feed. The overall color palette is desaturated greys and dirty whites, punctuated by neon hazard orange laces and details on the shoe. The aesthetic is industrial brutalism mixed with chaotic underground fashion editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl-u5SKuGUuwpARqMcnWOEQ6-5lbx2L00LHAy2F6brSdwjvqk0C9mQGbw7HUO7bc5TQmbTuFmbun5nOuH4Mr-JW8vzWl8GE3_ZDrps5UF-r2BW3t0FpbeTGqKwhRUHiFIr-GYd9_vHxlUsuQzdqTwuzUaMjaBNvupvAj4JlCYnNTY_fzP9z7m3lNBlDrsmBJm_Ps2U7fNKx4kPUJTUKCJPVBe8UiPRE0wD6PIxDRAATYpNI5OvSDGYgREa096XY0jnnmjZfItqcYg"/>
+<!-- Overlays -->
+<div class="absolute top-0 right-0 bg-secondary text-on-secondary border-l-4 border-b-4 border-outline p-2 z-10 shadow-[4px_4px_0px_0px_#12131a]">
+<p class="text-headline-md font-headline-md">$280</p>
+<p class="text-label-mono font-label-mono">SKU: RX-99</p>
+</div>
+<div class="absolute bottom-gutter left-0 bg-surface text-on-surface border-y-4 border-r-4 border-outline p-unit z-10 hazard-tape pl-gutter pr-margin-safe max-w-[80%] tape-jitter inline-block">
+<div class="bg-surface p-2 relative z-20">
+<h3 class="text-headline-lg-mobile font-headline-lg-mobile uppercase m-0 leading-none">VOID_RUNNER V2</h3>
+<p class="text-label-mono font-label-mono text-on-surface-variant">LIMITED DROP // HEAVY DUTY</p>
+</div>
+</div>
+</article>
+<!-- Item 2: Tall Graphic Tee -->
+<article class="col-span-1 md:col-span-4 md:row-span-2 group glitch-hover float-2 relative border-4 border-outline bg-surface-container overflow-hidden min-h-[300px] cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
+<div class="absolute inset-0 bg-white flash-overlay z-20 pointer-events-none"></div>
+<img alt="Product Visual" class="w-full h-full object-cover glitch-img transition-transform duration-75" data-alt="A model standing against a chainlink fence at night, illuminated by a stark, direct flash. They are wearing an oversized, heavy-weight distressed hoodie in concrete grey with chaotic, spray-painted anarchist graphics across the chest in warning yellow and black. The image has heavy film grain and a slightly degraded, photocopied texture consistent with an underground streetwear manifesto. The mood is rebellious and raw." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZAEb5O6NNt5_8-LlMXDJWQSWycwj3Zl4VFVvPMcE84fLgI7mGpESl_LNHoWT2r4PNf95zrRn9kKa0yABY98B2UtSI_eP06Zr4CFYZ24-Ha5rkv0I6kl1fTgzryAw46fKEVadk3RKCkUhu-nGsnsX4InEvjFMUuEB5vJA3I2OYZgXy9e5rWT8ux5lmgdE_OMlcYV_Mkw0FEjJnxo1jdCFcmGZywN1EAaWOObRN6bCG7vXjfTk_wN9bFN1VJvSWxyeBwHUT9gtrRlk"/>
+<div class="absolute top-4 left-[-20px] bg-error text-on-error font-label-mono text-label-mono px-8 py-1 rotate-[-45deg] border-2 border-outline z-10 shadow-[2px_2px_0px_0px_#12131a] tape-jitter">
+                        STREET VERIFIED
+                    </div>
+<div class="absolute bottom-0 right-0 w-full bg-surface-container-highest/90 border-t-4 border-outline p-gutter backdrop-blur-sm z-10">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-headline-md font-headline-md uppercase leading-none">HAZARD HOODIE</h3>
+</div>
+<p class="text-headline-md font-headline-md text-secondary bg-surface px-2 border-2 border-outline">$115</p>
+</div>
+</div>
+</article>
+<!-- Item 3: Accessory / Tech -->
+<article class="col-span-1 md:col-span-6 group glitch-hover float-3 relative border-4 border-outline bg-surface-container overflow-hidden h-[300px] cursor-pointer flex items-center justify-center shadow-lg hover:shadow-2xl transition-shadow duration-300">
+<div class="absolute inset-0 bg-white flash-overlay z-20 pointer-events-none"></div>
+<img alt="Product Visual" class="absolute inset-0 w-full h-full object-cover glitch-img opacity-60 mix-blend-luminosity transition-transform duration-75" data-alt="A close-up, macro shot of a heavy-duty, matte black tactical sling bag resting on a piece of brushed steel grating. A bright, clinical spotlight highlights the metallic buckles and reinforced nylon webbing. A stark yellow price tag is attached with a zip-tie. The aesthetic is purely industrial, focusing on utility, hardware, and raw materials with no softening elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcMKJRCYHEoGlMRE-F6HZu1MBunuvL-exuBv-Rp1qQH9mm1wuMRrxdnKKiqN-8P_OKqBEEA41GmA59Lov8KXS7Mmeq2514ZE-hvpeSS2sp04zVLcqzsoSo4lwHehRjIWnU22RswVgQavr6OqYCrmqgXDj-Pc65D7CKzIRi0jQV7POtoWi7ISH5yuncDr36j4LrQY-h2ioQZe1xnUL1pRH1e99lJPnWh0ttBgLzav7ilEaJ8TSbN9olvzhdMGV3CHRWcWWboXlXU6s"/>
+<div class="relative z-10 text-center p-gutter border-4 border-secondary bg-surface/80 backdrop-blur-md">
+<h3 class="text-headline-lg-mobile font-headline-lg-mobile text-secondary uppercase">CARGO_RIG .01</h3>
+<p class="text-label-mono font-label-mono text-on-surface">TACTICAL HARNESS // $85</p>
+</div>
+</article>
+<!-- Item 4: Text Block / Info (Editorial filler) -->
+<article class="col-span-1 md:col-span-3 border-4 border-outline bg-primary text-on-primary p-gutter flex flex-col justify-between min-h-[300px] float-4 shadow-lg">
+<div>
+<span class="material-symbols-outlined text-[48px] mb-4">warning</span>
+<h3 class="text-headline-md font-headline-md uppercase leading-tight mb-2">INVENTORY_WARNING</h3>
+<p class="text-body-md font-body-md border-l-4 border-on-primary pl-2">Stock levels for Series 09 are critically low. Restock unlikely. Proceed to checkout immediately to secure allocation.</p>
+</div>
+<button class="w-full bg-surface text-on-surface text-headline-md font-headline-md uppercase py-2 border-2 border-on-primary hover:bg-secondary hover:text-on-secondary hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#12131a] transition-all">
+                        VIEW MANIFEST
+                    </button>
+</article>
+<!-- Item 5: Small Square Image -->
+<article class="col-span-1 md:col-span-3 group glitch-hover float-1 relative border-4 border-outline bg-surface-container overflow-hidden h-[300px] cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
+<div class="absolute inset-0 bg-white flash-overlay z-20 pointer-events-none"></div>
+<img alt="Product Visual" class="w-full h-full object-cover glitch-img transition-transform duration-75" data-alt="A pair of heavily distressed, over-dyed black denim jeans folded roughly on a concrete floor next to a piece of yellow caution tape. Shot from directly above with a harsh flash that flattens the image and blows out the highlights on the metal rivets. The image conveys a gritty, DIY streetwear ethos, focusing on texture and underground authenticity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNZI65AGpypF8gC2LHtixA7hhTzOdmG8ohBchVqM5mL-SHbZP8-QkA82b0ZUfsmlBVQEg3pzcRw-Bwv0S5wt62FKiS49iOOPg16oD8Ai_HfSIW91KOIq-fPRoa7tyK3JvJ2Tu9_1EPTov1AM8iANuKfroTl-ddsXQ1KKvoI3Yy4ixU_Ph72AjN45MI4FVEOIlMcb7898LpxDhHASrKBgVC7_RiV7JcztRdioNmGHfUnxudey41YOLkNxQ0O4pgeLUmVlEdAAsB-mU"/>
+<div class="absolute bottom-2 right-2 bg-surface border-2 border-outline p-1 z-10 tape-jitter">
+<p class="text-label-mono font-label-mono text-on-surface">DENIM_RAW // $140</p>
+</div>
+</article>
+</div>
+<!-- Loading Indicator / End of Feed -->
+<div class="mt-stack-loose w-full flex flex-col items-center justify-center py-stack-loose border-t-4 border-dashed border-outline">
+<div class="relative inline-block overflow-hidden mb-2 border-2 border-secondary p-1">
+<span class="material-symbols-outlined text-[48px] text-secondary">barcode</span>
+<div class="absolute top-0 left-0 w-full h-0.5 bg-error shadow-[0_0_8px_2px_rgba(255,180,171,0.5)] animate-scan"></div>
+</div>
+<p class="text-label-mono font-label-mono text-on-surface-variant uppercase">Fetching more records...</p>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t-4 border-dashed border-outline w-full px-gutter py-stack-loose grid grid-cols-2 md:grid-cols-4 gap-gutter z-30 relative">
+<div class="col-span-2 md:col-span-4 mb-stack-tight">
+<p class="text-label-mono font-label-mono text-tertiary-fixed-dim uppercase">MANIFESTO_2024_V1.0</p>
+</div>
+<a class="text-on-surface-variant text-body-md font-body-md hover:text-error dark:hover:text-error uppercase" href="#">LOGISTICS</a>
+<a class="text-on-surface-variant text-body-md font-body-md hover:text-error dark:hover:text-error uppercase" href="#">DISTRIBUTION</a>
+<a class="text-on-surface-variant text-body-md font-body-md hover:text-error dark:hover:text-error uppercase" href="#">VOID_RECORDS</a>
+<a class="text-on-surface-variant text-body-md font-body-md hover:text-error dark:hover:text-error uppercase" href="#">ENCRYPTED</a>
+</footer>
+</body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop by Culture - STREET_ISSUE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c4c7c7",
+                      "on-surface": "#e3e1ec",
+                      "primary-fixed": "#e5e2e1",
+                      "inverse-primary": "#5f5e5e",
+                      "error-container": "#93000a",
+                      "surface-bright": "#383941",
+                      "secondary-fixed": "#ffe083",
+                      "on-primary": "#313030",
+                      "surface-container-high": "#292931",
+                      "on-error": "#690005",
+                      "primary": "#c9c6c5",
+                      "surface": "#12131a",
+                      "primary-container": "#0a0a0a",
+                      "on-tertiary-container": "#e03b34",
+                      "on-background": "#e3e1ec",
+                      "outline": "#8e9192",
+                      "on-secondary-fixed-variant": "#574500",
+                      "tertiary": "#ffb4ab",
+                      "surface-container-low": "#1a1b22",
+                      "on-primary-container": "#7b7979",
+                      "tertiary-container": "#200001",
+                      "surface-container": "#1e1f26",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-secondary": "#3c2f00",
+                      "inverse-surface": "#e3e1ec",
+                      "on-tertiary-fixed": "#410002",
+                      "secondary": "#ffe083",
+                      "surface-tint": "#c9c6c5",
+                      "surface-container-highest": "#33343c",
+                      "on-secondary-fixed": "#231b00",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#12131a",
+                      "inverse-on-surface": "#2f3038",
+                      "secondary-fixed-dim": "#eec200",
+                      "on-tertiary-fixed-variant": "#93000b",
+                      "tertiary-fixed": "#ffdad6",
+                      "background": "#12131a",
+                      "on-secondary-container": "#645000",
+                      "surface-container-lowest": "#0d0e15",
+                      "outline-variant": "#444748",
+                      "on-tertiary": "#690005",
+                      "secondary-container": "#eec200",
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-variant": "#33343c",
+                      "primary-fixed-dim": "#c9c6c5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-safe": "24px",
+                      "gutter": "16px",
+                      "unit": "4px",
+                      "stack-tight": "8px",
+                      "stack-loose": "48px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Anton"],
+                      "headline-lg": ["Anton"],
+                      "display-xl": ["Anton"],
+                      "display-xl-mobile": ["Anton"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "label-mono": ["JetBrains Mono"],
+                      "body-md": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "headline-md": ["32px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "headline-lg": ["48px", {"lineHeight": "44px", "fontWeight": "400"}],
+                      "display-xl": ["120px", {"lineHeight": "100px", "letterSpacing": "-0.04em", "fontWeight": "400"}],
+                      "display-xl-mobile": ["64px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .warning-stripe {
+            background: repeating-linear-gradient(
+                45deg,
+                #ffe083,
+                #ffe083 10px,
+                #12131a 10px,
+                #12131a 20px
+            );
+        }
+        .glitch-hover:hover {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            filter: contrast(150%) brightness(120%);
+        }
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-5deg); }
+            40% { transform: skew(5deg); }
+            60% { transform: skew(-2deg); }
+            80% { transform: skew(2deg); }
+            100% { transform: skew(0deg); }
+        }
+        .flash-overlay {
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.1s;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .group:hover .flash-overlay {
+            animation: flash 0.5s ease-out forwards;
+        }
+        @keyframes flash {
+            0% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen overflow-x-hidden pt-[80px]">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-secondary dark:text-secondary border-b-4 border-outline dark:border-outline-variant shadow-[4px_4px_0px_0px_rgba(238,194,0,1)] fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-unit">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-primary dark:hover:bg-primary hover:text-on-primary p-2 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-headline-md font-headline-md uppercase tracking-tighter text-on-surface dark:text-on-surface">
+            STREET_ISSUE
+        </div>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-primary dark:hover:bg-primary hover:text-on-primary p-2 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</header>
+<!-- SideNav / Drawer (Hidden on Mobile, Visible on md+) -->
+<nav class="hidden md:flex flex-col h-full w-80 fixed top-[80px] left-0 bg-surface-container-highest dark:bg-surface-container-highest border-r-4 border-outline p-margin-safe space-y-stack-tight z-40">
+<div class="text-headline-lg font-headline-lg text-secondary mb-stack-loose border-b-2 border-outline-variant pb-2">SYSTEM_OVERRIDE</div>
+<a class="flex items-center space-x-4 p-3 text-on-surface hover:bg-surface-variant hover:invert transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-headline-md font-headline-md uppercase">THE_MANIFEST</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-on-surface hover:bg-surface-variant hover:invert transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="warehouse">warehouse</span>
+<span class="text-headline-md font-headline-md uppercase">STOCK_ROOM</span>
+</a>
+<!-- Active Tab Mapping for "Shop by Culture" -> DROP_ZONE -->
+<a class="flex items-center space-x-4 p-3 bg-secondary text-on-secondary-fixed font-black skew-x-2 transition-transform duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+<span class="text-headline-md font-headline-md uppercase">DROP_ZONE</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-on-surface hover:bg-surface-variant hover:invert transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-headline-md font-headline-md uppercase">ARCHIVE</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-on-surface hover:bg-surface-variant hover:invert transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="text-headline-md font-headline-md uppercase">COMMAND</span>
+</a>
+</nav>
+<!-- Main Canvas -->
+<main class="md:ml-80 min-h-screen p-gutter flex flex-col gap-gutter">
+<!-- Header -->
+<div class="border-b-4 border-outline pb-4 mb-4 flex justify-between items-end">
+<h1 class="text-display-xl-mobile md:text-display-xl font-display-xl-mobile md:font-display-xl text-on-surface uppercase leading-none tracking-tighter">
+                CULTURE<br/><span class="text-secondary">INDEX</span>
+</h1>
+<div class="text-label-mono font-label-mono text-outline bg-surface-container-high p-2 border-2 border-outline-variant">
+                SEQ: 001-A<br/>VOL: 42
+            </div>
+</div>
+<!-- Asymmetric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter auto-rows-[300px] md:auto-rows-[400px]">
+<!-- DRIFT CLUB -->
+<a class="group relative col-span-1 md:col-span-8 row-span-1 md:row-span-2 border-4 border-outline bg-surface-container overflow-hidden glitch-hover" href="#">
+<div class="flash-overlay"></div>
+<img alt="Drift Club" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A gritty, cinematic shot of a modified street racing car at night in an underground concrete parking garage. The scene is lit by harsh, stark fluorescent lights creating deep shadows and bright hotspots, embodying an industrial, raw, underground warehouse aesthetic with heavy film grain. Dark blacks and metallic greys dominate the palette, with flashes of hazardous orange reflecting off the wet concrete floor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtE9xnE1rttIBU-1LUJP8ez9BDxhXWD45BH2CdLyNVkb-kHOrTS0FbJBnErsagoTNWJHTo90n2ZcGGXyxoL2A-jKKWV9Xi0lhqRBxf6A58tG4gNp4NlWBKHLajVzgujywlmrRNT6D1D-RtLSdr5yFQ1UFtkXFz5Xq_gAuhDnwQmZNgSHsutFNjSQYDzqGyy8jMbQL8lo5nTYZ6cuU7_VtxdgWgaeo_YSkaizFtG7yxtgUufMnVxQKm0z7pLxMjA2sghrla1KHcOfw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-2 py-1 text-label-mono font-label-mono border-2 border-on-secondary shadow-[2px_2px_0px_0px_rgba(35,27,0,1)]">
+                    CAT://01_DRIFT
+                </div>
+<div class="absolute bottom-4 left-4 md:bottom-8 md:left-8">
+<h2 class="text-display-xl-mobile md:text-display-xl font-display-xl-mobile md:font-display-xl text-on-surface group-hover:text-secondary transition-colors uppercase m-0 leading-none" style="-webkit-text-stroke: 2px #12131a;">
+                        DRIFT<br/>CLUB
+                    </h2>
+</div>
+</a>
+<!-- NIGHT SHIFT -->
+<a class="group relative col-span-1 md:col-span-4 row-span-1 border-4 border-outline bg-surface-container overflow-hidden glitch-hover" href="#">
+<div class="flash-overlay"></div>
+<img alt="Night Shift" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-500" data-alt="An atmospheric, low-angle photograph of a person wearing dark, oversized streetwear standing under a flickering street lamp in an alleyway. The lighting is extremely moody and high-contrast, casting long, harsh shadows against raw brick and metal surfaces. The scene uses a deep color palette of dark slate and midnight black, punctuated by a harsh white light flare, fitting a brutalist, street editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB93UB_Y0IO2nshZ_7_VmXqiIY0uetUPVrS9CZAuaiuaxQgdGQwAJX74q5OsE8ldM1i5Ri7XdLlJRuz99ZgIP-3l-abH8gSvP8UBHT6zgxznTFl8rcGQetc5CYyjo0_juHKStUVdSgrS6gTdylLzKxbF3au4nBK20bOhAd2vPVqnAkTLyjMxp4zJBDASpk_IDcmsY-0hoqocz0iiJ7o8I5M-vCGai3agFGlV6F37P22Hh35wGeGnZM9EHwYlGf808SVYXXLkO0nSQU"/>
+<div class="absolute top-4 right-4 bg-error text-on-error px-2 py-1 text-label-mono font-label-mono border-2 border-on-error shadow-[2px_2px_0px_0px_rgba(105,0,5,1)]">
+                    CAT://02_NIGHT
+                </div>
+<div class="absolute bottom-4 left-4">
+<h2 class="text-headline-lg md:text-display-xl-mobile font-headline-lg md:font-display-xl-mobile text-on-surface group-hover:text-error transition-colors uppercase m-0 leading-none">
+                        NIGHT<br/>SHIFT
+                    </h2>
+</div>
+</a>
+<!-- Warning Tape Divider (Mobile only) -->
+<div class="md:hidden warning-stripe h-6 w-full border-y-2 border-outline"></div>
+<!-- SNEAKERHEAD -->
+<a class="group relative col-span-1 md:col-span-4 row-span-1 border-4 border-outline bg-surface-container overflow-hidden glitch-hover" href="#">
+<div class="flash-overlay"></div>
+<img alt="Sneakerhead" class="absolute inset-0 w-full h-full object-cover opacity-70 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A harsh, flash-photography style close-up of a stack of distressed, limited-edition sneakers piled haphazardly in a metal warehouse crate. The aesthetic is raw and unpolished, resembling evidence photography or a gritty warehouse manifest. The lighting is direct and blown-out, emphasizing the textures of scuffed leather, heavy canvas, and rusted metal in a predominantly monochrome palette with stark white highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBslK2AAxvkAr2DhnaVai1wfd4If77FIM_8_S-466dy3DpmwkyZ7aEwlEUNpjr76u0VnYOlRnLZdEfkbi5BIjCeUMBwceNSpMhsuR36sczufS5pWFB95bKh8RS-SshY4z-YjF3FLKk-UoPy5fmwNz0C02el7MR7ri_uQokM3SZ6bnA5kmiGY-SlvsMapZ2NFrMOOrF7QFKajWxCpkBRc1qD-AFzP14r1Dj9AlMwpoQ9bwEQqv-xMw8yEg3qeDmFxGsCpK0r83SdvEU"/>
+<div class="absolute top-4 left-4 bg-on-surface text-surface px-2 py-1 text-label-mono font-label-mono border-2 border-surface shadow-[2px_2px_0px_0px_rgba(18,19,26,1)]">
+                    CAT://03_SNEAKER
+                </div>
+<div class="absolute bottom-4 right-4 text-right">
+<h2 class="text-headline-lg md:text-display-xl-mobile font-headline-lg md:font-display-xl-mobile text-on-surface group-hover:text-primary transition-colors uppercase m-0 leading-none">
+                        SNEAKER<br/>HEAD
+                    </h2>
+</div>
+</a>
+<!-- UNDERGROUND -->
+<a class="group relative col-span-1 md:col-span-6 row-span-1 md:row-span-2 border-4 border-outline bg-surface-container overflow-hidden glitch-hover" href="#">
+<div class="flash-overlay"></div>
+<img alt="Underground" class="absolute inset-0 w-full h-full object-cover opacity-50 sepia-[.3] group-hover:sepia-0 transition-all duration-500" data-alt="A chaotic, wide-angle shot of a crowded, dimly lit underground club or warehouse rave, shot with a slow shutter speed to create motion blur on the moving figures wearing heavy industrial fashion. The scene is framed by thick concrete pillars and exposed ceiling pipes. The color palette relies on deep shadows, industrial greys, and sudden, piercing flashes of strobe light, capturing a raw, rebellious energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6xgpb5YAV_MLIW821Fi1yB2aORr9zv5BS2Pfq0HZkawMtXIZCzygGfuwo21jHRJluiHEXkKrPI_DkxtDyd4BkM3ZgSrICjNBrO8CFqRHGFTUCpPVn2Dc8ddpD06VyOYCgZAnFMpvFHpx4cs21PSktSVe9Vx7sv8cVXMkcrrpFz29BdDm06yuGL26pVV3Q4FdAmnh1JpVyPmdsAaF61_kl5077eCcGxBZDKdvomlzseQ_5poNDV0fws6dwL9dQGDbxpfU03CG53Vs"/>
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 mix-blend-overlay"></div>
+<div class="absolute top-4 left-4 bg-tertiary-fixed-dim text-on-tertiary-fixed px-2 py-1 text-label-mono font-label-mono border-2 border-on-tertiary-fixed shadow-[2px_2px_0px_0px_rgba(65,0,2,1)]">
+                    CAT://04_UNDRGRND
+                </div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-center">
+<h2 class="text-display-xl-mobile md:text-display-xl font-display-xl-mobile md:font-display-xl text-on-surface group-hover:text-tertiary-fixed-dim transition-colors uppercase m-0 leading-none tracking-tighter" style="text-shadow: 4px 4px 0px #12131a;">
+                        UNDER<br/>GROUND
+                    </h2>
+</div>
+</a>
+<!-- HEAVY FITS -->
+<a class="group relative col-span-1 md:col-span-6 row-span-1 border-4 border-outline bg-surface-container overflow-hidden glitch-hover" href="#">
+<div class="flash-overlay"></div>
+<img alt="Heavy Fits" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="A stark, frontal fashion editorial shot of a model wearing bulky, multi-layered, brutalist outerwear covered in tactical straps and heavy zippers. The background is a plain, distressed corrugated metal wall. The lighting mimics a harsh camera flash, flattening the image and emphasizing the heavy textures of the clothing. The overall aesthetic is industrial, tactical, and uncompromising in a dark, muted palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdNtaDLP17afJeE68J3jWh_F6A2y4J6HysEqaTJrcci0RZy_8BG4SW6wsnhVAGH8u_ax43PBtD-0wEpKrTAdp3rsZZfGpxzUk5585WQvvXdp6QGjkMO5LbOPouTjAjlsU8Jj2yY8qxt7rSVAOApocDiqGTLDetuaxIbKiHG7TXTqtt0Mq1rvezTxXudtfB0I4A3I5Uk_bjIIf3vxhmH8EYxvu27H13DuN5xIpYxSeIT11A12cF8cG5zob18jGi7QxsuP2BanRX9d8"/>
+<div class="absolute top-4 right-4 bg-surface text-on-surface px-2 py-1 text-label-mono font-label-mono border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(227,225,236,1)]">
+                    CAT://05_HVY
+                </div>
+<div class="absolute bottom-4 left-4 border-l-4 border-secondary pl-4">
+<h2 class="text-headline-lg md:text-display-xl-mobile font-headline-lg md:font-display-xl-mobile text-on-surface group-hover:text-secondary transition-colors uppercase m-0 leading-none">
+                        HEAVY<br/>FITS
+                    </h2>
+</div>
+</a>
+</div>
+</main>
+<!-- Footer -->
+<footer class="md:ml-80 bg-surface-container-lowest dark:bg-surface-container-lowest text-tertiary dark:text-tertiary border-t-4 border-dashed border-outline w-full px-gutter py-stack-loose grid grid-cols-2 md:grid-cols-4 gap-gutter mt-stack-loose relative z-10">
+<div class="col-span-2 md:col-span-4 mb-4">
+<div class="text-label-mono font-label-mono text-tertiary-fixed-dim border-b-2 border-outline-variant pb-2 inline-block">
+                MANIFESTO_2024_V1.0
+            </div>
+</div>
+<a class="text-on-surface-variant hover:text-error dark:hover:text-error text-body-md font-body-md uppercase transition-colors" href="#">
+            LOGISTICS
+        </a>
+<a class="text-on-surface-variant hover:text-error dark:hover:text-error text-body-md font-body-md uppercase transition-colors" href="#">
+            DISTRIBUTION
+        </a>
+<a class="text-on-surface-variant hover:text-error dark:hover:text-error text-body-md font-body-md uppercase transition-colors" href="#">
+            VOID_RECORDS
+        </a>
+<a class="text-on-surface-variant hover:text-error dark:hover:text-error text-body-md font-body-md uppercase transition-colors" href="#">
+            ENCRYPTED
+        </a>
+</footer>
+</body></html>
